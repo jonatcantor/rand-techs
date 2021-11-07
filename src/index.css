@@ -10,6 +10,8 @@
   --primary_font: 'Share Tech Mono', monospace;
   --secondary_font: 'Roboto Mono', monospace;
 
+  --primary_color: #2c3e50;
+
   --horizontal: 1rem;
   --vertical: 2rem;
 }
@@ -45,16 +47,30 @@
 }
 
 body {
-  min-height: 100vh;
   scroll-behavior: smooth;
   text-rendering: optimizeSpeed;
+  background: #D3CCE3;
+  background: linear-gradient(90deg, #D3CCE3 0%, #E9E4F0 100%);
+  color: var(--primary_color);
+}
+
+a {
+  text-decoration: none;
+}
+
+.root {
+  min-height: 100vh;
+  max-width: 1920px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 0 auto;
   padding: var(--vertical) var(--horizontal);
 }
 
@@ -69,4 +85,28 @@ body {
   font-family: var(--secondary_font);
   font-size: 1rem;
   text-align: center;
+  max-width: 768px;
+}
+
+
+
+
+
+
+
+
+.footer {
+  padding: var(--vertical) var(--horizontal);
+  display: flex;
+  justify-content: center;
+}
+
+.footer__text {
+  font-family: var(--primary_font);
+  font-size: 1rem;
+  font-style: normal;
+}
+
+.footer__link {
+  color: var(--primary_color);
 }
