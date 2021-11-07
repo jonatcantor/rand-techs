@@ -9,7 +9,11 @@ export const ConsoleScreen = (props) => {
 
   return (
     <ul className='console__screen' ref={ screenDOM }>
-      { props.value.map((command, index) => <li key={ index } className='console__text'> { command }</li>) }
+      {
+        props.value.map((command, index) => {
+          return <li key={ index } className={`console__text ${ command.error ? 'console__text--error' : 'console__text--command' }`}> { command.command }</li>
+        })
+      }
     </ul>
   );
 }

@@ -13,7 +13,9 @@
 
   --primary_color: #2c3e50;
   --secondary_color: #D3CCE3;
-  --tertiary_color: #502c3e;
+  --tertiary_color: #2c503e;
+  --error_color: #502c3e;
+
   --horizontal: 1rem;
   --vertical: 2rem;
 
@@ -179,6 +181,8 @@ a {
   margin-left: calc(var(--console_padding) + 0.5rem);
 }
 
+.console__text--error { color: var(--error_color) }
+.console__text--command { color: var(--tertiary_color) }
 
 .footer {
   padding: var(--vertical) var(--horizontal);
