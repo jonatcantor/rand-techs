@@ -1,28 +1,18 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef } from 'react'
 
-export const ConsoleInput = () => {
-  const [input, setInput] = useState('');
+export const ConsoleInput = (props) => {
   const inputDOM = useRef(null);
-
-  const changeHandle = (e) => {
-    setInput(e.target.value);
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setInput('');
-  }
 
   useEffect(() => {
     inputDOM.current.focus();
   }, []);
 
   return (
-    <form onSubmit={ handleSubmit }>
+    <>
       <label className='console__label'>
         <span className='console__icon'>&gt;&gt;&gt;</span>
-        <input value={ input } onChange={ changeHandle } ref={ inputDOM } type='text' spellCheck='false' maxLength='20' className='console__input' />
+        <input value={ props.value } onChange={ props.onChangeInput } ref={ inputDOM } type='text' spellCheck='false' maxLength='20' className='console__input' />
       </label>
-    </form>
+    </>
   );
 }

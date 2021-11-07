@@ -12,7 +12,7 @@
   --secondary_font: 'Roboto Mono', monospace;
 
   --primary_color: #2c3e50;
-
+  --secondary_color: #D3CCE3;
   --horizontal: 1rem;
   --vertical: 2rem;
 
@@ -61,7 +61,7 @@
 body {
   scroll-behavior: smooth;
   text-rendering: optimizeSpeed;
-  background: #D3CCE3;
+  background: var(--secondary_color);
   background: linear-gradient(90deg, #D3CCE3 0%, #E9E4F0 100%);
   color: var(--primary_color);
 }
@@ -93,6 +93,11 @@ a {
   text-align: center;
 }
 
+.header__title::-moz-selection, .header__title::selection {
+  background-color: var(--primary_color);
+  color: var(--secondary_color);
+}
+
 .header__description {
   font-family: var(--secondary_font);
   font-size: 1rem;
@@ -100,11 +105,16 @@ a {
   max-width: 768px;
 }
 
+.header__description::-moz-selection, .header__description::selection {
+  background-color: var(--primary_color);
+  color: var(--secondary_color);
+}
+
 .console {
   aspect-ratio: var(--console_factor);
   width: calc(100% - var(--horizontal) * 2);
   max-width: 768px;
-  margin: 0 auto;
+  margin: var(--vertical) auto;
   border: solid 0.2rem var(--primary_color);
   border-radius: var(--console_border_radius);
   padding: var(--console_padding);
@@ -129,7 +139,7 @@ a {
   background: none;
   padding: 0.5rem 0;
   caret-color: var(--primary_color);
-  border-bottom: solid 0.2rem var(--primary_color);
+  border-bottom: solid 0.15rem var(--primary_color);
   font-family: var(--primary_font);
   color: var(--primary_color);
 }
@@ -158,4 +168,9 @@ a {
 
 .footer__link {
   color: var(--primary_color);
+}
+
+.footer__link::-moz-selection, .footer__link::selection {
+  background-color: var(--primary_color);
+  color: var(--secondary_color);
 }
