@@ -4,6 +4,7 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  border: none;
 }
 
 :root {
@@ -14,6 +15,11 @@
 
   --horizontal: 1rem;
   --vertical: 2rem;
+
+  --console_factor: 768 / 1366;
+  --console_width: 100vw;
+  --console_border_radius: 2rem;
+  --console_padding: 1rem;
 }
 
 @media (min-width: 320px) {
@@ -43,6 +49,12 @@
 @media (min-width: 1920px) {
   :root {
     --horizontal: 10rem;
+  }
+}
+
+@media (orientation: landscape) {
+  :root {
+    --console_factor: 1366 / 768;
   }
 }
 
@@ -88,11 +100,48 @@ a {
   max-width: 768px;
 }
 
+.console {
+  aspect-ratio: var(--console_factor);
+  width: calc(100% - var(--horizontal) * 2);
+  max-width: 768px;
+  margin: 0 auto;
+  border: solid 0.2rem var(--primary_color);
+  border-radius: var(--console_border_radius);
+  padding: var(--console_padding);
 
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+}
 
+.console__label {
+  display: grid;
+  grid-template-columns: min-content 1fr;
+  column-gap: 0.5rem;
+  align-items: center;
+}
 
+.console__input {
+  height: 100%;
+  width: 100%;
+  font-size: 1.5rem;
+  background: none;
+  padding: 0.5rem 0;
+  caret-color: var(--primary_color);
+  border-bottom: solid 0.2rem var(--primary_color);
+  font-family: var(--primary_font);
+  color: var(--primary_color);
+}
 
+.console__input:focus {
+  outline: none;
+}
 
+.console__icon {
+  font-family: var(--primary_font);
+  font-size: 1.5rem;
+}
 
 
 .footer {

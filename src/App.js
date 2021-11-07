@@ -1,13 +1,13 @@
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
-import { Main } from "./components/Main";
+import { Console } from "./components/Console";
 
 function App() {
   return (
     <>
       <Header />
 
-      <Main />
+      <Console />
       
       <Footer />
     </>
