@@ -10,7 +10,38 @@
   --primary_font: 'Share Tech Mono', monospace;
   --secondary_font: 'Roboto Mono', monospace;
 
-  --lateral: 10rem;
+  --horizontal: 1rem;
+  --vertical: 2rem;
+}
+
+@media (min-width: 320px) {
+  :root {
+    --horizontal: 2rem;
+  }
+}
+
+@media (min-width: 768px) {
+  :root {
+    --horizontal: 4rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --horizontal: 6rem;
+  }
+}
+
+@media (min-width: 1440px) {
+  :root {
+    --horizontal: 8rem;
+  }
+}
+
+@media (min-width: 1920px) {
+  :root {
+    --horizontal: 10rem;
+  }
 }
 
 body {
@@ -22,15 +53,20 @@ body {
 .header {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  padding: var(--vertical) var(--horizontal);
 }
 
 .header__title {
   font-family: var(--primary_font);
   font-size: 2rem;
   margin-bottom: 1rem;
+  text-align: center;
 }
 
 .header__description {
   font-family: var(--secondary_font);
   font-size: 1rem;
+  text-align: center;
 }
