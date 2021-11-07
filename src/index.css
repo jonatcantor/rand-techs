@@ -13,6 +13,7 @@
 
   --primary_color: #2c3e50;
   --secondary_color: #D3CCE3;
+  --tertiary_color: #502c3e;
   --horizontal: 1rem;
   --vertical: 2rem;
 
@@ -62,7 +63,6 @@ body {
   scroll-behavior: smooth;
   text-rendering: optimizeSpeed;
   background: var(--secondary_color);
-  background: linear-gradient(90deg, #D3CCE3 0%, #E9E4F0 100%);
   color: var(--primary_color);
 }
 
@@ -151,6 +151,32 @@ a {
 .console__icon {
   font-family: var(--primary_font);
   font-size: 1.5rem;
+}
+
+.console__screen {
+  max-height: 100%;
+  overflow-y: scroll;
+  scrollbar-color: var(--primary_color) var(--secondary_color);
+}
+
+.console__screen::-webkit-scrollbar {
+  width: 6px;
+}
+
+.console__screen::-webkit-scrollbar-thumb {
+  border-radius: 6px;
+  background-color: var(--primary_color);
+}
+
+.console__screen::-webkit-scrollbar-track {
+  background-color: var(--secondary_color);
+  border-radius: 6px;
+}
+
+.console__text {
+  font-family: var(--secondary_font);
+  font-size: 1.5rem;
+  margin-left: calc(var(--console_padding) + 0.5rem);
 }
 
 
