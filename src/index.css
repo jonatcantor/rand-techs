@@ -135,7 +135,6 @@ a {
 }
 
 .console__input {
-  height: 100%;
   width: 100%;
   font-size: 1.5rem;
   background: none;
@@ -150,15 +149,10 @@ a {
   outline: none;
 }
 
-.console__icon {
-  font-family: var(--primary_font);
-  font-size: 1.5rem;
-}
-
 .console__screen {
-  max-height: 100%;
   overflow-y: scroll;
   scrollbar-color: var(--primary_color) var(--secondary_color);
+  list-style-type: none;
 }
 
 .console__screen::-webkit-scrollbar {
@@ -175,10 +169,17 @@ a {
   border-radius: 6px;
 }
 
+.console__command {
+  display: grid;
+  grid-template-columns: min-content 1fr;
+  column-gap: 0.25rem;
+}
+
 .console__text {
   font-family: var(--secondary_font);
   font-size: 1.5rem;
-  margin-left: calc(var(--console_padding) + 0.5rem);
+  line-height: 1;
+  margin-bottom: 0.5rem;
 }
 
 .console__text--error { color: var(--error_color) }
