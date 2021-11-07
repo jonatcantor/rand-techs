@@ -12,6 +12,9 @@
   --secondary_font: 'Roboto Mono', monospace;
 
   --primary_color: #2c3e50;
+  --secondary_color: #D3CCE3;
+  --tertiary_color: #2c503e;
+  --error_color: #502c3e;
 
   --horizontal: 1rem;
   --vertical: 2rem;
@@ -61,8 +64,7 @@
 body {
   scroll-behavior: smooth;
   text-rendering: optimizeSpeed;
-  background: #D3CCE3;
-  background: linear-gradient(90deg, #D3CCE3 0%, #E9E4F0 100%);
+  background: var(--secondary_color);
   color: var(--primary_color);
 }
 
@@ -93,6 +95,11 @@ a {
   text-align: center;
 }
 
+.header__title::-moz-selection, .header__title::selection {
+  background-color: var(--primary_color);
+  color: var(--secondary_color);
+}
+
 .header__description {
   font-family: var(--secondary_font);
   font-size: 1rem;
@@ -100,11 +107,16 @@ a {
   max-width: 768px;
 }
 
+.header__description::-moz-selection, .header__description::selection {
+  background-color: var(--primary_color);
+  color: var(--secondary_color);
+}
+
 .console {
   aspect-ratio: var(--console_factor);
   width: calc(100% - var(--horizontal) * 2);
   max-width: 768px;
-  margin: 0 auto;
+  margin: var(--vertical) auto;
   border: solid 0.2rem var(--primary_color);
   border-radius: var(--console_border_radius);
   padding: var(--console_padding);
@@ -123,13 +135,12 @@ a {
 }
 
 .console__input {
-  height: 100%;
   width: 100%;
   font-size: 1.5rem;
   background: none;
   padding: 0.5rem 0;
   caret-color: var(--primary_color);
-  border-bottom: solid 0.2rem var(--primary_color);
+  border-bottom: solid 0.15rem var(--primary_color);
   font-family: var(--primary_font);
   color: var(--primary_color);
 }
@@ -138,11 +149,41 @@ a {
   outline: none;
 }
 
-.console__icon {
-  font-family: var(--primary_font);
-  font-size: 1.5rem;
+.console__screen {
+  overflow-y: scroll;
+  scrollbar-color: var(--primary_color) var(--secondary_color);
+  list-style-type: none;
 }
 
+.console__screen::-webkit-scrollbar {
+  width: 6px;
+}
+
+.console__screen::-webkit-scrollbar-thumb {
+  border-radius: 6px;
+  background-color: var(--primary_color);
+}
+
+.console__screen::-webkit-scrollbar-track {
+  background-color: var(--secondary_color);
+  border-radius: 6px;
+}
+
+.console__command {
+  display: grid;
+  grid-template-columns: min-content 1fr;
+  column-gap: 0.25rem;
+}
+
+.console__text {
+  font-family: var(--secondary_font);
+  font-size: 1.5rem;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.console__text--error { color: var(--error_color) }
+.console__text--command { color: var(--tertiary_color) }
 
 .footer {
   padding: var(--vertical) var(--horizontal);
@@ -158,4 +199,9 @@ a {
 
 .footer__link {
   color: var(--primary_color);
+}
+
+.footer__link::-moz-selection, .footer__link::selection {
+  background-color: var(--primary_color);
+  color: var(--secondary_color);
 }
