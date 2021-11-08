@@ -6,12 +6,17 @@ export const Console = () => {
   const [input, setInput] = useState('');
   const [screen, setScreen] = useState([]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setInput('');
 
     if(checkCommand(input)) {
       setScreen([...screen, { error: false, command: input }]);
+
+      const response = await fetch(process.env.REACT_APP_API_URL);
+      const techs = await response.json();
+      
+      console.log(techs);
     }
 
     else {
@@ -24,16 +29,22 @@ export const Console = () => {
   }
 
   const checkCommand = (command) => {
-    const INIT_COMMANDS = ['rand'];
-    const TYPE_COMMANDS = ['frontend', 'backend'];
-    const STACK_COMMANDS = ['basic', 'php', 'preprocessors', 'nodejs', 'python'];
-
     const commandSplit = command.split(' ');
 
-    if(!INIT_COMMANDS.find(command => commandSplit[0] === command)) return false;
-    if(!TYPE_COMMANDS.find(command => commandSplit[1] === command)) return false;
-    if(!STACK_COMMANDS.find(command => commandSplit[2] === command)) return false;
+    const COMMANDS = {
+      INIT: ['rand', 'ecos'],
+      RAND: ['fron', 'back', 'full'],
+      ECOS: ['react'],
+    }
 
+    const primaryCommand = COMMANDS.INIT.find(command => commandSplit[0] === command);
+
+    if(!primaryCommand) return false;
+
+    const secondaryCommand = COMMANDS[primaryCommand.toUpperCase()].find(command => commandSplit[1] === command);
+
+    if(!secondaryCommand) return false;
+    
     return true;
   }
 
