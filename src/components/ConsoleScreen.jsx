@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import { MdOutlineError, MdRadioButtonChecked } from 'react-icons/md';
+import { ConsoleTechs } from './ConsoleTechs';
 
 export const ConsoleScreen = (props) => {
   const screenDOM = useRef(null);
@@ -16,6 +17,7 @@ export const ConsoleScreen = (props) => {
             <li key={ index } className='console__command'>
               { command.error ? <MdOutlineError size='1.5rem' fill='var(--error_color)' /> : <MdRadioButtonChecked size='1.5rem' fill='var(--tertiary_color)' /> }
               <p className={`console__text${ command.error ? ' console__text--error' : ' console__text--command' }`}> { command.command }</p>
+              { command.techs && command.techs.length > 0 && <ConsoleTechs techs = { command.techs } /> }
             </li>
           );
         })
