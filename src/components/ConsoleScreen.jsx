@@ -17,7 +17,7 @@ export const ConsoleScreen = (props) => {
             <li key={ index } className='console__command'>
               { command.error ? <MdOutlineError size='1.5rem' fill='var(--error_color)' /> : <MdRadioButtonChecked size='1.5rem' fill='var(--tertiary_color)' /> }
               <p className={`console__text${ command.error ? ' console__text--error' : ' console__text--command' }`}> { command.command }</p>
-              { command.techs && command.techs.length > 0 && <ConsoleTechs techs = { command.techs } /> }
+              { command.techs && <ConsoleTechs techs = { command.techs } /> }
             </li>
           );
         })
