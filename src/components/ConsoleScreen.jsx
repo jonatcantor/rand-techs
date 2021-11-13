@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import { MdOutlineError, MdRadioButtonChecked } from 'react-icons/md';
 import { ConsoleTechs } from './ConsoleTechs';
 
-export const ConsoleScreen = (props) => {
+export const ConsoleScreen = React.memo(props => {
   const screenDOM = useRef(null);
 
   useEffect(() => {
@@ -24,4 +24,4 @@ export const ConsoleScreen = (props) => {
       }
     </ul>
   );
-}
+});
