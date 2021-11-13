@@ -13,10 +13,10 @@ export const Console = () => {
     if(checkCommand(input)) {
       setScreen([...screen, { error: false, command: input }]);
 
-      const response = await fetch(process.env.REACT_APP_API_URL);
+      const response = await fetch(process.env.REACT_APP_API_URL + `?command=${ input }`);
       const techs = await response.json();
-      
-      console.log(techs);
+
+      setScreen([...screen, { error: false, command: input, techs: techs }]);
     }
 
     else {
