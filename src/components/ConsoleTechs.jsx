@@ -23,6 +23,17 @@ export const ConsoleTechs = (props) => {
             </li>
           );
         })
-      }</ul>
+      }
+      {
+        props.techs.ecos && props.techs.ecos.map((tech, index) => {
+          return (
+            <li key={ index } className='console__techicon'>
+              <p className='console__tech'>{ tech.name } ({ tech.ecosystem })</p>
+              <a href={ tech.link } target='_blank' rel='noreferrer' className='console__link'><FiLink size='1rem' /></a>
+            </li>
+          );
+        })
+      }
+    </ul>
   );
 }
