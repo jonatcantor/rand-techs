@@ -34,6 +34,12 @@ export const ConsoleTechs = (props) => {
           );
         })
       }
+      {
+        props.techs.error &&
+          <li className='console__techicon'>
+            <p className='console__tech'>{ props.techs.error }</p>
+          </li>
+      }
     </ul>
   );
 }
