@@ -11,6 +11,11 @@ export const Console = () => {
     setInput('');
 
     if(checkCommand(input)) {
+      if(input === 'clear') {
+        setScreen([{ error: false, command: input }]);
+        return;
+      }
+
       setScreen([...screen, { error: false, command: input }]);
 
       const response = await fetch(process.env.REACT_APP_API_URL + `?command=${ input }`);
@@ -32,7 +37,7 @@ export const Console = () => {
     const commandSplit = command.split(' ');
 
     const COMMANDS = {
-      INIT: ['rand', 'ecos'],
+      INIT: ['rand', 'ecos', 'clear'],
       RAND: ['fron', 'back', 'full'],
       ECOS: ['react'],
     }
@@ -40,6 +45,9 @@ export const Console = () => {
     const primaryCommand = COMMANDS.INIT.find(command => commandSplit[0] === command);
 
     if(!primaryCommand) return false;
+
+    if(commandSplit[0] === 'clear' && commandSplit.length > 1) return false;
+    else if(commandSplit[0] === 'clear') return true;
 
     const secondaryCommand = COMMANDS[primaryCommand.toUpperCase()].find(command => commandSplit[1] === command);
 
