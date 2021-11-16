@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import { MdOutlineError, MdRadioButtonChecked } from 'react-icons/md';
 import { ConsoleTechs } from './ConsoleTechs';
+import { ConsoleCommands } from './ConsoleCommands';
 
 export const ConsoleScreen = React.memo(props => {
   const screenDOM = useRef(null);
@@ -17,7 +18,8 @@ export const ConsoleScreen = React.memo(props => {
             <li key={ index } className='console__command'>
               { command.error ? <MdOutlineError size='1.5rem' fill='var(--error_color)' /> : <MdRadioButtonChecked size='1.5rem' fill='var(--tertiary_color)' /> }
               <p className={`console__text${ command.error ? ' console__text--error' : ' console__text--command' }`}> { command.command }</p>
-              { command.techs && <ConsoleTechs techs = { command.techs } /> }
+              { command.techs && <ConsoleTechs techs={ command.techs } /> }
+              { command.commands && <ConsoleCommands commands={ command.commands } /> }
             </li>
           );
         })

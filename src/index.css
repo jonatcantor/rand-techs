@@ -217,6 +217,31 @@ a {
 
 .console__link { color: var(--primary_color) }
 
+.console__commands {
+  grid-column: 1 / -1;
+  display: grid;
+  row-gap: 0.5rem;
+}
+
+.console__commands li {
+  margin-left: var(--console_padding);
+  list-style-type: disc;
+}
+
+.console__comm {
+  font-family: var(--primary_font);
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.console__comm--belong {
+  color: var(--tertiary_color);
+}
+
+.console__desc {
+  font-family: var(--secondary_font);
+}
+
 .footer {
   padding: var(--vertical) var(--horizontal);
   display: flex;
