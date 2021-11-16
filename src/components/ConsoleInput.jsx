@@ -21,7 +21,7 @@ export const ConsoleInput = (props) => {
           maxLength='20'
           className='console__input'
           placeholder={ props.placeholder }
-          autocapitalize='off'
+          autoCapitalize='off'
         />
       </label>
     </>
