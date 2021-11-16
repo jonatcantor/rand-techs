@@ -12,7 +12,16 @@ export const ConsoleInput = (props) => {
     <>
       <label className='console__label'>
         <FaTerminal size='1.5rem' />
-        <input value={ props.value } onChange={ props.onChangeInput } ref={ inputDOM } type='text' spellCheck='false' maxLength='20' className='console__input' />
+        <input
+          value={ props.value }
+          onChange={ props.onChangeInput }
+          ref={ inputDOM }
+          type='text'
+          spellCheck='false'
+          maxLength='20'
+          className='console__input'
+          placeholder={ props.placeholder }
+        />
       </label>
     </>
   );

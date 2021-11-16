@@ -2,6 +2,26 @@ import React, { useState } from 'react'
 import { ConsoleInput } from './ConsoleInput.jsx'
 import { ConsoleScreen } from './ConsoleScreen.jsx';
 
+const COMMANDS = {
+  SIMP: ['help', 'clear'],
+  INIT: ['rand', 'ecos'],
+  RAND: ['fron', 'back', 'full'],
+  ECOS: ['react'],
+}
+
+const COMMANDS_DESCRIPTION = {
+  help: 'shows you more information about all the commands',
+  clear: 'clear the console screen',
+  rand: {
+    desc: 'get random technologies with the commands below',
+    commands: COMMANDS.RAND,
+  },
+  ecos: {
+    desc: 'get random technologies that belong to the same language or framework with the commands below',
+    commands: COMMANDS.ECOS,
+  },
+}
+
 export const Console = () => {
   const [input, setInput] = useState('');
   const [screen, setScreen] = useState([]);
@@ -13,6 +33,11 @@ export const Console = () => {
     if(checkCommand(input)) {
       if(input === 'clear') {
         setScreen([{ error: false, command: input }]);
+        return;
+      }
+
+      else if(input === 'help') {
+        setScreen([...screen, { error: false, command: input, commands: COMMANDS_DESCRIPTION }]);
         return;
       }
 
@@ -36,18 +61,14 @@ export const Console = () => {
   const checkCommand = (command) => {
     const commandSplit = command.split(' ');
 
-    const COMMANDS = {
-      INIT: ['rand', 'ecos', 'clear'],
-      RAND: ['fron', 'back', 'full'],
-      ECOS: ['react'],
-    }
+    let primaryCommand = COMMANDS.SIMP.find(command => commandSplit[0] === command);
 
-    const primaryCommand = COMMANDS.INIT.find(command => commandSplit[0] === command);
+    // if is SIMP command
+    if(primaryCommand && commandSplit.length === 1) return true;
 
-    if(!primaryCommand) return false;
+    primaryCommand = COMMANDS.INIT.find(command => commandSplit[0] === command);
 
-    if(commandSplit[0] === 'clear' && commandSplit.length > 1) return false;
-    else if(commandSplit[0] === 'clear') return true;
+    if(!primaryCommand || commandSplit.length > 2) return false;
 
     const secondaryCommand = COMMANDS[primaryCommand.toUpperCase()].find(command => commandSplit[1] === command);
 
@@ -59,7 +80,10 @@ export const Console = () => {
   return (
     <form onSubmit={ handleSubmit } className='console'>
       <ConsoleScreen value={ screen } />
-      <ConsoleInput onChangeInput={ handleChangeInput } value={ input } />
+      <ConsoleInput
+        onChangeInput={ handleChangeInput }
+        value={ input }
+        placeholder={ screen.length === 0 ? "type 'help'" : 'type some command!' } />
     </form>
   );
 }
