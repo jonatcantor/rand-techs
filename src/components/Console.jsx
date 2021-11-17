@@ -1,30 +1,40 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ConsoleInput } from './ConsoleInput.jsx'
 import { ConsoleScreen } from './ConsoleScreen.jsx';
-
-const COMMANDS = {
-  SIMP: ['help', 'clear'],
-  INIT: ['rand', 'ecos'],
-  RAND: ['fron', 'back', 'full'],
-  ECOS: ['react'],
-}
-
-const COMMANDS_DESCRIPTION = {
-  help: 'shows you more information about all the commands',
-  clear: 'clear the console screen',
-  rand: {
-    desc: 'get random technologies with the commands below',
-    commands: COMMANDS.RAND,
-  },
-  ecos: {
-    desc: 'get random technologies that belong to the same language or framework with the commands below',
-    commands: COMMANDS.ECOS,
-  },
-}
 
 export const Console = () => {
   const [input, setInput] = useState('');
   const [screen, setScreen] = useState([]);
+  const [commands, setCommands] = useState({});
+
+  const COMMANDS_DESCRIPTION = {
+    help: 'shows you more information about all the commands',
+    clear: 'clear the console screen',
+    rand: {
+      desc: 'get random technologies with the commands below',
+      commands: commands.RAND,
+    },
+    ecos: {
+      desc: 'get random technologies that belong to the same language or framework with the commands below',
+      commands: commands.ECOS,
+    },
+  }
+
+  useEffect(() => {
+    const ecosystemsAPI = async () => {
+      const response = await fetch(process.env.REACT_APP_API_URL + process.env.REACT_APP_ENDPOINT_ECOSYSTEMS);
+      const data = await response.json();
+
+      setCommands({
+        SIMP: ['help', 'clear'],
+        INIT: ['rand', 'ecos'],
+        RAND: ['fron', 'back', 'full'],
+        ECOS: data.ecos.map(ecosystem => ecosystem.command),
+      });
+    }
+
+    ecosystemsAPI();
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -43,7 +53,7 @@ export const Console = () => {
 
       setScreen([...screen, { error: false, command: input }]);
 
-      const response = await fetch(process.env.REACT_APP_API_URL + `?command=${ input }`);
+      const response = await fetch(process.env.REACT_APP_API_URL + process.env.REACT_APP_ENDPOINT_TECHNOLOGIES + `?command=${ input }`);
       const techs = await response.json();
 
       setScreen([...screen, { error: false, command: input, techs: techs }]);
@@ -61,16 +71,16 @@ export const Console = () => {
   const checkCommand = (command) => {
     const commandSplit = command.split(' ');
 
-    let primaryCommand = COMMANDS.SIMP.find(command => commandSplit[0] === command);
+    let primaryCommand = commands.SIMP.find(command => commandSplit[0] === command);
 
     // if is SIMP command
     if(primaryCommand && commandSplit.length === 1) return true;
 
-    primaryCommand = COMMANDS.INIT.find(command => commandSplit[0] === command);
+    primaryCommand = commands.INIT.find(command => commandSplit[0] === command);
 
     if(!primaryCommand || commandSplit.length > 2) return false;
 
-    const secondaryCommand = COMMANDS[primaryCommand.toUpperCase()].find(command => commandSplit[1] === command);
+    const secondaryCommand = commands[primaryCommand.toUpperCase()].find(command => commandSplit[1] === command);
 
     if(!secondaryCommand) return false;
     
@@ -83,7 +93,8 @@ export const Console = () => {
       <ConsoleInput
         onChangeInput={ handleChangeInput }
         value={ input }
-        placeholder={ screen.length === 0 ? "type 'help'" : 'type some command!' } />
+        placeholder={ screen.length === 0 ? "type 'help'" : 'type some command!' }
+      />
     </form>
   );
 }
