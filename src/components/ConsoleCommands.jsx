@@ -8,7 +8,7 @@ export const ConsoleCommands = (props) => {
         return (
           props.commands[command].commands ?
           <ul key={ index }>
-            <p><span className='console__comm'>{ command }</span> : <span className='console__desc'>{ props.commands[command].desc }</span></p>
+            <p><span className='console__comm'>{ command } : </span><span className='console__desc'>{ props.commands[command].desc }</span></p>
             {
               props.commands[command].commands.map((subCommand, index) => {
                 return (
@@ -20,7 +20,7 @@ export const ConsoleCommands = (props) => {
             }
           </ul> :
           <li key={ index }>
-            <span className='console__comm'>{ command }</span> : <span className='console__desc'>{ props.commands[command] }</span>
+            <span className='console__comm'>{ command } : </span><span className='console__desc'>{ props.commands[command] }</span>
           </li>
         );
       })
